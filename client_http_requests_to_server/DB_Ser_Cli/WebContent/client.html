@@ -3,34 +3,43 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Database Center</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 	<span id="messageGoesHere"></span>
 	<p>Please enter your query here:</p>
 	<form>
-	<input id="textMessage" type="text">
-	<input id="send" onclick="sendMessage();" value="Send Message" type="button">
-	<i class="material-icons" style="font-size:30px;text-align: center;padding: 10px 0;">computer</i>
+		<input id="textMessage" type="text"> <input id="send"
+			onclick="sendMessage();" value="Send Message" type="button">
+		<i class="material-icons"
+			style="font-size: 30px; text-align: center; padding: 10px 0;">computer</i>
 	</form>
-	
+
+	<form action="http://192.168.0.106:8080/DB_Ser_Cli/logout" method="get">
+		<input id="submit" type="submit" value="Logout">
+	</form>
+
 	<br>
 	<textarea id="serverMessage" rows="10" cols="100" readonly></textarea>
-	
+
 	<script type="text/javascript">
-		var ws = new WebSocket("ws://localhost:8080/DB_Ser_Cli/index");
+		var ws = new WebSocket("ws://192.168.0.106:8080/DB_Ser_Cli/index");
 		var para = document.getElementById("messagesTextArea");
-		
-		ws.onmessage = function(event){
+
+		ws.onmessage = function(event) {
 			var mySpan = document.getElementById("messageGoesHere");
 			serverMessage.value = event.data;
+			if (serverMessage.value == "Invalid Login") {
+				window.location.href = "login.html";
+			} else {
+
+			}
 		};
-		
-		function sendMessage(){
+
+		function sendMessage() {
 			ws.send(textMessage.value);
-			//messagesTextArea.value+="Send to Server ===> " + textMessage.value + "\n";
-			//textMessage.value="";
 		}
 	</script>
 </body>

@@ -2,8 +2,6 @@ package Server_side;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -11,7 +9,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -42,7 +39,12 @@ public class Recepion extends HttpServlet {
 	@OnOpen
 	public void Greetings(Session session) {
 		try {
-			session.getBasicRemote().sendText("Welcome");
+			User_Info user = new User_Info();
+			if(user.getLockStatus() == false){
+				session.getBasicRemote().sendText("Welcome");
+			}else{
+				session.getBasicRemote().sendText("Invalid Login");
+			}
 		} catch (IOException ioe) {
 			System.out.println(ioe.getMessage());
 		}
@@ -101,7 +103,6 @@ public class Recepion extends HttpServlet {
 				stmt.executeUpdate(dropQuery);
 				stmt.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			return "The query is not valid.";

@@ -7,10 +7,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.net.URLDecoder;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,16 +17,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-import javax.websocket.OnMessage;
 
 @WebServlet("/upload")
 @MultipartConfig
 public class FileUpload extends HttpServlet {
-	
-    private final static Logger LOGGER = 
+	private static final long serialVersionUID = 1L;
+
+	private final static Logger LOGGER = 
             Logger.getLogger(FileUpload.class.getCanonicalName());
-    
-    private boolean flag = true;
  
     protected void doPost(HttpServletRequest request,
             HttpServletResponse response)
