@@ -1,3 +1,5 @@
+(On-going)
+
 Purpose:
 This project is an application of how a web server handles http requests from clients. This project intends to provide administrator a flexible way
 to manage a database (derby) using an html file from another end-system, provide version control support for files.
@@ -6,5 +8,17 @@ Description:
 Upon connecting to the web server, the user will be linked to the default home page login.html. The user is then required to enter credentials for authentication.
 On the server side, the servlet "Login" is designed to handle the authentication from the user. Upon successful authentication, the servlet "login" will allow the 
 user to retrieve data from database in the client.html, and upload files to the host machine in login.html.
+
+Tool that is used to generate data is located in Database_Entries_Generator. It allows randomized string type data to be created under the
+specified table name by simply dragging a mouse in the indicated area.
+
+
+Progress:
+Currently, user can be successfully authenticated by entering "admin" as the username and be able to retrieve data from the database. User is also able to upload 
+files from other end system that is compatible with html and javascript to the web server (host machine) under the same network.
+
+Features yet to be implemented:
+Upon successufully authenticated, user should be able to download the available files from the web server. User should be also be able to log a message to the web 
+server indicating any issues found in the files on the server.
 
 
