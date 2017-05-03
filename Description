@@ -1,4 +1,0 @@
-Description:
-
-The on-going project showcases how a web server handles http requests from client. On the server side, the servlet named "Login" is designed to 
-provide adminstrator authentication to a client in order to procceed to databases entries retrieval from another end system under the same network
