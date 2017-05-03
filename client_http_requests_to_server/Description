@@ -16,11 +16,13 @@ specified table name by simply dragging a mouse in the indicated area.
 Progress:
 Currently, user can be successfully authenticated by entering "admin" as the username and be able to retrieve data from the database. User is also able to upload 
 files from other end system that is compatible with html and javascript to the web server (host machine) under the same network.
+There can be only one admin logined at a time.
+
 
 Features yet to be implemented:
 Upon successufully authenticated, user should be able to download the available files from the web server.
 
-User should be also be able to log a message to the web server indicating any issues found in the files on the server.
+User should also be able to log a message to the web server indicating any issues found in the files on the server.
 
 To ensure only authenticated users can access the database, client.html and upload.html should not be accessible before successful authentication on the user
 
