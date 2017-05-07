@@ -24,7 +24,6 @@ Upon successufully authenticated, user should be able to download the available 
 
 User should also be able to log a message to the web server indicating any issues found in the files on the server.
 
-To ensure only authenticated users can access the database, client.html and upload.html should not be accessible before successful authentication on the user
 
 
 
