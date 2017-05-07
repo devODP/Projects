@@ -15,22 +15,26 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/logout")
 public class logout extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	private static AuthenticationScheme auth;
+	
 	public logout() {
 		super();
+		auth = new AuthenticationScheme();
 	}
-
+	
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		User_Info user = new User_Info();
-		System.out.println(request.getRemoteAddr() + " " + request.getRemotePort());
-		if (request.getRemoteAddr().equals(user.getAddr()) && request.getRemotePort() == user.getPortNumber()) {
+		PrintWriter out = response.getWriter();
+		if (request.getRemoteAddr().equals(user.getAddr())) {
 			user.setLockStatus(true);
-			response.sendRedirect("login.html"); 
+			user.setAddrVoid();
+			user.setPortVoid();
+			auth.setFreshUser(true);
+			response.sendRedirect("login.html");
 		} else {
-			PrintWriter out = response.getWriter();
-			out.println("Someone is logined as an admin");
+			out.println("Someone is logined as an administrator before you do.");
 		}
 	}
-
 }

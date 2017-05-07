@@ -4,6 +4,8 @@
 <meta charset="ISO-8859-1">
 <title>Database Center</title>
 <link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
 	href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="style.css">
 </head>
@@ -16,11 +18,18 @@
 		<i class="material-icons"
 			style="font-size: 30px; text-align: center; padding: 10px 0;">computer</i>
 	</form>
-
+	<br>
 	<form action="http://192.168.0.106:8080/DB_Ser_Cli/logout" method="get">
-		<input id="submit" type="submit" value="Logout">
+		<input id="logout" type="submit" value="Logout">
 	</form>
-
+	<br>
+	<br>
+	<form action="http://192.168.0.106:8080/DB_Ser_Cli/upload" enctype="multipart/form-data" method="POST">
+            File:
+            <input type="file" name="file" id="file" accept=".csv,.xls,.xlsx"/>
+			<i class="fa fa-file" style="font-size:30px;color:lightblue;font-weight: 200;"></i><br><br>
+            <input type="submit" id="ul" name="upload" value="Upload" />
+    </form>
 	<br>
 	<textarea id="serverMessage" rows="10" cols="100" readonly></textarea>
 
@@ -33,14 +42,24 @@
 			serverMessage.value = event.data;
 			if (serverMessage.value == "Invalid Login") {
 				window.location.href = "login.html";
-			} else {
-
+			}
+			else if(serverMessage.value == "clientContinue"){
+				window.location.href = "client.html";
+			}
+			else if(serverMessage.value == "returnedFromUpload"){
+				window.location.href = "client.html";
 			}
 		};
 
 		function sendMessage() {
 			ws.send(textMessage.value);
 		}
-	</script>
+
+		//window.onbeforeunload = function(event) {
+		//	var message = 'User closed window';
+		//	ws.send(message);
+		//};
+
+		</script>
 </body>
 </html>

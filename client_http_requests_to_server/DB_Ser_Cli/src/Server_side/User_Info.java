@@ -2,11 +2,11 @@ package Server_side;
 
 public class User_Info {
 	private static boolean lock = true;
-	private static String address;
-	private static int portNumber;
+	private static String address = "";
+	private static int portNumber = -1;
 
 	User_Info(String addr, int port) {
-		if (lock == true) {
+		if (lock == true && address.equals("")) {
 			address = addr;
 			portNumber = port;
 			lock = false;
@@ -24,6 +24,14 @@ public class User_Info {
 		return portNumber;
 	}
 
+	public void setAddrVoid(){
+		address = "";
+	}
+	
+	public void setPortVoid(){
+		portNumber = -1;
+	}
+	
 	public void setLockStatus(boolean status) {
 		lock = status;
 	}
