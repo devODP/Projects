@@ -15,8 +15,8 @@ specified table name by simply dragging a mouse in the indicated area.
 
 Progress:
 Currently, user can be successfully authenticated by entering "admin" as the username and be able to retrieve data from the database. User is also able to upload 
-files from other end system that is compatible with html and javascript to the web server (host machine) under the same network.
-There can be only one admin logined at a time.
+files from another end system that is compatible with html and javascript to the web server (host machine) under the same network.
+There can be only one admin logged in at a time. Second user is restricted to request any service on the web server until the first user logged out.
 
 
 Features yet to be implemented:
