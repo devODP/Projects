@@ -24,6 +24,14 @@ Upon successufully authenticated, user should be able to download the available 
 
 User should also be able to log a message to the web server indicating any issues found in the files on the server.
 
+All SQL commands should be supported.
+
+The application should support inserting data into the database from excel sheet provided from users
+
+The application should support creating excel file using data returned from database
+
+Add testings to the web application
+
 
 
 
