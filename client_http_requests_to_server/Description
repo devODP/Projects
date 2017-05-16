@@ -17,7 +17,9 @@ Progress:
 Currently, user can be successfully authenticated by entering "admin" as the username and be able to retrieve data from the database. User is also able to upload 
 files from another end system that is compatible with html and javascript to the web server (host machine) under the same network.
 There can be only one admin logged in at a time. Second user is restricted to request any service on the web server until the first user logged out.
-The application can support inserting data into the database from .csv file provided from users
+The application can support inserting data into the database from .csv file provided from users.
+
+Test cases have been added.
 
 Features yet to be implemented:
 Upon successufully authenticated, user should be able to download the available files from the web server.
@@ -26,7 +28,6 @@ User should also be able to log a message to the web server indicating any issue
 
 The application should support creating excel file using data returned from database
 
-Add testings to the web application
 
 
 
