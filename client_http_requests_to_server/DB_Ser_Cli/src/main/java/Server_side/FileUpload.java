@@ -62,7 +62,7 @@ public class FileUpload extends HttpServlet {
 
 				auth.setReturnedFromUpload(true);
 				
-				//pass an array consisting of the path and the file name
+				//stores an array consisting of the path and the file name for the servlet "insert"
 				String fullPath[] = new String[2];
 				fullPath[0] = path;
 				fullPath[1] = fileName;
