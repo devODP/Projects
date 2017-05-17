@@ -32,6 +32,7 @@ public class TestClient_sendSQL {
 					"C:\\Users\\Owen\\workspaceJEE\\DB_Ser_Cli\\src\\test\\java\\web_test\\global_variables.properties");
 			prop.load(config);
 			address = prop.getProperty("domain");
+			System.setProperty("webdriver.chrome.driver", "C:\\Users\\Owen\\workspaceJEE\\webDriver_lib\\chromedriver.exe");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -41,7 +42,6 @@ public class TestClient_sendSQL {
 	
 	@Test
 	public void client_send_sql() {
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Owen\\workspaceJEE\\webDriver_lib\\chromedriver.exe");
 		WebDriver driver = new ChromeDriver();
 		driver.get(address + "login.html");
 
@@ -89,7 +89,6 @@ public class TestClient_sendSQL {
 	
 	@AfterClass
 	public static void dropTables() {
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Owen\\workspaceJEE\\webDriver_lib\\chromedriver.exe");
 		WebDriver driver = new ChromeDriver();
 		driver.get(address + "login.html");
 

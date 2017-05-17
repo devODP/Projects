@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.util.Properties;
 
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -26,6 +25,7 @@ public class TestClient_Security {
 					"C:\\Users\\Owen\\workspaceJEE\\DB_Ser_Cli\\src\\test\\java\\web_test\\global_variables.properties");
 			prop.load(config);
 			address = prop.getProperty("domain");
+			System.setProperty("webdriver.chrome.driver", "C:\\Users\\Owen\\workspaceJEE\\webDriver_lib\\chromedriver.exe");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -35,7 +35,6 @@ public class TestClient_Security {
 
 	@Test
 	public void notAuthenticated() throws InterruptedException {
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Owen\\workspaceJEE\\webDriver_lib\\chromedriver.exe");
 		WebDriver driver = new ChromeDriver();
 
 		driver.get(address + "client.html");
@@ -48,7 +47,6 @@ public class TestClient_Security {
 
 	@Test
 	public void IsolatedAccess() {
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Owen\\workspaceJEE\\webDriver_lib\\chromedriver.exe");
 		WebDriver driver1 = new ChromeDriver();
 
 		try {

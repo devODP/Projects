@@ -7,10 +7,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
-import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
+
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -31,6 +30,7 @@ public class TestClient_fileUpload {
 					"C:\\Users\\Owen\\workspaceJEE\\DB_Ser_Cli\\src\\test\\java\\web_test\\global_variables.properties");
 			prop.load(config);
 			address = prop.getProperty("domain");
+			System.setProperty("webdriver.chrome.driver", "C:\\Users\\Owen\\workspaceJEE\\webDriver_lib\\chromedriver.exe");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -40,7 +40,6 @@ public class TestClient_fileUpload {
 
 	@Test
 	public void client_uploadFile() {
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Owen\\workspaceJEE\\webDriver_lib\\chromedriver.exe");
 		WebDriver driver = new ChromeDriver();
 		driver.get(address + "login.html");
 
@@ -71,7 +70,6 @@ public class TestClient_fileUpload {
 
 	@Test
 	public void client_uploadFile_Insert() {
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Owen\\workspaceJEE\\webDriver_lib\\chromedriver.exe");
 		WebDriver driver = new ChromeDriver();
 		driver.get(address + "login.html");
 
@@ -113,7 +111,6 @@ public class TestClient_fileUpload {
 
 	@AfterClass
 	public static void dropTables() {
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Owen\\workspaceJEE\\webDriver_lib\\chromedriver.exe");
 		WebDriver driver = new ChromeDriver();
 		driver.get(address + "login.html");
 
