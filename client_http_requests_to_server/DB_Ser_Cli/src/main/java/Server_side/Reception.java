@@ -6,6 +6,8 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -17,6 +19,8 @@ import javax.websocket.server.ServerEndpoint;
 
 @ServerEndpoint("/index")
 public class Reception extends HttpServlet {
+	private final static Logger LOGGER = Logger.getLogger(FileUpload.class.getCanonicalName());
+	
 	private static final long serialVersionUID = 1L;
 	private static AuthenticationScheme auth;
 	private static User_Info user;
@@ -46,7 +50,7 @@ public class Reception extends HttpServlet {
 				session.getBasicRemote().sendText("Invalid Login");
 			}
 		} catch (IOException ioe) {
-			System.out.println(ioe.getMessage());
+			LOGGER.log(Level.SEVERE, "Problem occured in greetings.", new Object[] { ioe.getMessage() });
 		}
 	}
 
@@ -115,12 +119,12 @@ public class Reception extends HttpServlet {
 			} catch (SQLException se) {
 				try {
 					stmt.close();
+					LOGGER.log(Level.SEVERE, "Problem with SQL command.", new Object[] { se.getMessage() });
 					return se.getMessage();
 				} catch (SQLException e) {
+					LOGGER.log(Level.SEVERE, "Problem in cleaning up environment.", new Object[] { e.getMessage() });
 					return e.getMessage();
 				}
-			} catch (Exception e) {
-				return e.getMessage();
 			}
 		}
 	}

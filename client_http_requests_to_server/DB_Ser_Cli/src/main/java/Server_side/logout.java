@@ -2,6 +2,7 @@ package Server_side;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,6 +36,7 @@ public class logout extends HttpServlet {
 			response.sendRedirect("login.html");
 		} else {
 			out.println("Someone is logined as an administrator before you do.");
+			out.println("Please come back in a moment");
 		}
 	}
 }

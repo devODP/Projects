@@ -62,12 +62,15 @@ public class FileUpload extends HttpServlet {
 
 				auth.setReturnedFromUpload(true);
 				
-				//stores an array consisting of the path and the file name for the servlet "insert"
+				/* stores an array consisting of the path and 
+				 * the file name for the servlet "insert"
+				 */
 				String fullPath[] = new String[2];
 				fullPath[0] = path;
 				fullPath[1] = fileName;
 				user.setFileName(fullPath);
 				user.setFileEmpty(false);
+				
 				response.sendRedirect("client.html");
 			} catch (FileNotFoundException fne) {
 				LOGGER.log(Level.INFO, "No file is selected");

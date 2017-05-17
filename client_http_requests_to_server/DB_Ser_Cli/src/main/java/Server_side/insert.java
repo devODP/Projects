@@ -6,6 +6,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,6 +21,7 @@ import Server_side.DB_Connection;
 @WebServlet("/insert")
 public class insert extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private final static Logger LOGGER = Logger.getLogger(insert.class.getCanonicalName());
 	private static User_Info user;
 
 	public insert() {
@@ -28,7 +31,7 @@ public class insert extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		if (user.isFileEmpty() == true) {
+		if (user.isFileEmpty() == false) {
 			String path = user.getFileName()[0];
 			String fileName = user.getFileName()[1];
 			String tableName = fileName.substring(0, fileName.indexOf('.'));
@@ -59,8 +62,9 @@ public class insert extends HttpServlet {
 
 						try {
 							stmt.executeUpdate(createTable);
+							LOGGER.log(Level.INFO, "Table " + tableName + " created.");
 						} catch (SQLException se) {
-							se.printStackTrace();
+							LOGGER.log(Level.SEVERE, "Problem during creating table.", new Object[] { se.getMessage() });
 						}
 						
 						/*the data in .csv file will be processed 
@@ -85,15 +89,16 @@ public class insert extends HttpServlet {
 						
 						try {
 							stmt.executeUpdate(insertQuery);
-						} catch (SQLException se) {
-							se.printStackTrace();
+							LOGGER.log(Level.INFO, "Data in the file are inserted into database.");
+							} catch (SQLException se) {
+							LOGGER.log(Level.SEVERE, "Problem during inserting data.", new Object[] { se.getMessage() });
 						}
 					}
 				}
 
 				user.setFileEmpty(true);
 			} catch (IOException e) {
-				e.printStackTrace();
+				LOGGER.log(Level.SEVERE, "Problem during reading the file.", new Object[] { e.getMessage() });
 			}
 		}
 
