@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- WARNING: Eclipse auto-generated file.
+              Any modifications will be overwritten.
+              To include a user specific buildfile here, simply create one in the same
+              directory with the processing instruction <?eclipse.ant.import?>
+              as the first entry and export the buildfile again. --><project basedir="." default="build" name="DB_Ser_Cli">
+    <property environment="env"/>
+    <property name="ECLIPSE_HOME" value="C:/Users/Owen/Desktop/eclipse/"/>
+    <property name="junit.output.dir" value="junit"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.8"/>
+    <property name="source" value="1.8"/>
+    <path id="GlassFish System Libraries.libraryclasspath">
+        <pathelement location="../glassfish4/glassfish/modules/bean-validator.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/cdi-api.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/endorsed/javax.annotation-api.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/endorsed/jaxb-api.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/endorsed/webservices-api-osgi.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/glassfish-api.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/ha-api.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/javax.batch-api.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/javax.ejb-api.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/javax.el.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/javax.enterprise.concurrent-api.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/javax.enterprise.concurrent.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/javax.enterprise.deploy-api.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/javax.faces.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/javax.inject.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/javax.interceptor-api.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/javax.jms-api.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/javax.json.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/javax.mail.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/javax.management.j2ee-api.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/javax.persistence.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/javax.resource-api.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/javax.security.auth.message-api.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/javax.security.jacc-api.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/javax.servlet-api.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/javax.servlet.jsp-api.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/javax.servlet.jsp.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/javax.servlet.jsp.jstl-api.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/javax.servlet.jsp.jstl.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/javax.transaction-api.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/javax.websocket-api.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/javax.ws.rs-api.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/javax.xml.registry-api.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/javax.xml.rpc-api.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/jaxb-extra-osgi.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/jaxb-osgi.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/jersey-bean-validation.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/jersey-cdi1x-servlet.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/jersey-cdi1x-transaction.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/jersey-cdi1x.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/jersey-client.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/jersey-common.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/jersey-container-grizzly2-http.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/jersey-container-servlet-core.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/jersey-container-servlet.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/jersey-entity-filtering.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/jersey-gf-ejb.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/jersey-guava.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/jersey-media-jaxb.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/jersey-media-json-jackson.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/jersey-media-json-jettison.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/jersey-media-json-processing.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/jersey-media-moxy.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/jersey-media-multipart.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/jersey-media-sse.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/jersey-mvc-connector.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/jersey-mvc-jsp.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/jersey-mvc.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/jersey-server.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/org.eclipse.persistence.antlr.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/org.eclipse.persistence.asm.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/org.eclipse.persistence.core.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/org.eclipse.persistence.dbws.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/org.eclipse.persistence.jpa.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/org.eclipse.persistence.jpa.jpql.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/org.eclipse.persistence.jpa.modelgen.processor.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/org.eclipse.persistence.moxy.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/org.eclipse.persistence.oracle.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/webservices-connector.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/webservices-extra-jdk-packages.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/webservices-osgi.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/webservices.security.jar"/>
+        <pathelement location="../glassfish4/glassfish/modules/weld-osgi-bundle.jar"/>
+        <pathelement location="../glassfish4/mq/lib/jaxm-api.jar"/>
+    </path>
+    <path id="Web App Libraries.libraryclasspath"/>
+    <path id="EAR Libraries.libraryclasspath"/>
+    <path id="JUnit 4.libraryclasspath">
+        <pathelement location="${ECLIPSE_HOME}plugins/org.junit_4.12.0.v201504281640/junit.jar"/>
+        <pathelement location="${ECLIPSE_HOME}plugins/org.hamcrest.core_1.3.0.v201303031735.jar"/>
+    </path>
+    <path id="DB_Ser_Cli.classpath">
+        <pathelement location="build/classes"/>
+        <path refid="GlassFish System Libraries.libraryclasspath"/>
+        <path refid="Web App Libraries.libraryclasspath"/>
+        <path refid="EAR Libraries.libraryclasspath"/>
+        <path refid="JUnit 4.libraryclasspath"/>
+        <pathelement location="../seleniumLibrary/client-combined-3.3.1-nodeps.jar"/>
+        <pathelement location="../seleniumLibrary/lib/cglib-nodep-3.2.4.jar"/>
+        <pathelement location="../seleniumLibrary/lib/commons-codec-1.10.jar"/>
+        <pathelement location="../seleniumLibrary/lib/commons-exec-1.3.jar"/>
+        <pathelement location="../seleniumLibrary/lib/commons-io-2.5.jar"/>
+        <pathelement location="../seleniumLibrary/lib/commons-lang3-3.5.jar"/>
+        <pathelement location="../seleniumLibrary/lib/commons-logging-1.2.jar"/>
+        <pathelement location="../seleniumLibrary/lib/cssparser-0.9.21.jar"/>
+        <pathelement location="../seleniumLibrary/lib/gson-2.8.0.jar"/>
+        <pathelement location="../seleniumLibrary/lib/guava-21.0.jar"/>
+        <pathelement location="../seleniumLibrary/lib/hamcrest-core-1.3.jar"/>
+        <pathelement location="../seleniumLibrary/lib/hamcrest-library-1.3.jar"/>
+        <pathelement location="../seleniumLibrary/lib/htmlunit-2.24.jar"/>
+        <pathelement location="../seleniumLibrary/lib/htmlunit-core-js-2.23.jar"/>
+        <pathelement location="../seleniumLibrary/lib/htmlunit-driver-2.24.jar"/>
+        <pathelement location="../seleniumLibrary/lib/httpclient-4.5.2.jar"/>
+        <pathelement location="../seleniumLibrary/lib/httpcore-4.4.4.jar"/>
+        <pathelement location="../seleniumLibrary/lib/httpmime-4.5.2.jar"/>
+        <pathelement location="../seleniumLibrary/lib/javax.servlet-api-3.1.0.jar"/>
+        <pathelement location="../seleniumLibrary/lib/jetty-io-9.4.1.v20170120.jar"/>
+        <pathelement location="../seleniumLibrary/lib/jetty-util-9.4.1.v20170120.jar"/>
+        <pathelement location="../seleniumLibrary/lib/jna-4.1.0.jar"/>
+        <pathelement location="../seleniumLibrary/lib/jna-platform-4.1.0.jar"/>
+        <pathelement location="../seleniumLibrary/lib/junit-4.12.jar"/>
+        <pathelement location="../seleniumLibrary/lib/neko-htmlunit-2.24.jar"/>
+        <pathelement location="../seleniumLibrary/lib/phantomjsdriver-1.4.0.jar"/>
+        <pathelement location="../seleniumLibrary/lib/sac-1.3.jar"/>
+        <pathelement location="../seleniumLibrary/lib/serializer-2.7.2.jar"/>
+        <pathelement location="../seleniumLibrary/lib/websocket-api-9.2.20.v20161216.jar"/>
+        <pathelement location="../seleniumLibrary/lib/websocket-client-9.2.20.v20161216.jar"/>
+        <pathelement location="../seleniumLibrary/lib/websocket-common-9.2.20.v20161216.jar"/>
+        <pathelement location="../seleniumLibrary/lib/xalan-2.7.2.jar"/>
+        <pathelement location="../seleniumLibrary/lib/xercesImpl-2.11.0.jar"/>
+        <pathelement location="../seleniumLibrary/lib/xml-apis-1.4.01.jar"/>
+    </path>
+    <target name="init">
+        <mkdir dir="build/classes"/>
+        <copy includeemptydirs="false" todir="build/classes">
+            <fileset dir="src/main/java">
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+        <copy includeemptydirs="false" todir="build/classes">
+            <fileset dir="src/test/java">
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="clean">
+        <delete dir="build/classes"/>
+    </target>
+    <target depends="clean" name="cleanall"/>
+    <target depends="build-subprojects,build-project" name="build"/>
+    <target name="build-subprojects"/>
+    <target depends="init" name="build-project">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="build/classes" includeantruntime="false" source="${source}" target="${target}">
+            <src path="src/main/java"/>
+            <src path="src/test/java"/>
+            <classpath refid="DB_Ser_Cli.classpath"/>
+        </javac>
+    </target>
+    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
+    <target name="DB_Ser_Cli">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="web_test.TestClient_Security" todir="${junit.output.dir}"/>
+            <test name="web_test.TestClient_fileUpload" todir="${junit.output.dir}"/>
+            <test name="web_test.TestClient_sendSQL" todir="${junit.output.dir}"/>
+            <test name="web_test.TestLogin" todir="${junit.output.dir}"/>
+            <test name="web_test.TestLogin_Security" todir="${junit.output.dir}"/>
+            <test name="web_test.WebApp_Tests" todir="${junit.output.dir}"/>
+            <classpath refid="DB_Ser_Cli.classpath"/>
+        </junit>
+    </target>
+    <target name="pathFinder">
+        <java classname="Server_side.pathFinder" failonerror="true" fork="yes">
+            <classpath refid="DB_Ser_Cli.classpath"/>
+        </java>
+    </target>
+    <target name="TestClient_fileUpload">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="web_test.TestClient_fileUpload" todir="${junit.output.dir}"/>
+            <classpath refid="DB_Ser_Cli.classpath"/>
+        </junit>
+    </target>
+    <target name="TestClient_Security">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="web_test.TestClient_Security" todir="${junit.output.dir}"/>
+            <classpath refid="DB_Ser_Cli.classpath"/>
+        </junit>
+    </target>
+    <target name="TestClient_sendSQL">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="web_test.TestClient_sendSQL" todir="${junit.output.dir}"/>
+            <classpath refid="DB_Ser_Cli.classpath"/>
+        </junit>
+    </target>
+    <target name="TestLogin">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="web_test.TestLogin" todir="${junit.output.dir}"/>
+            <classpath refid="DB_Ser_Cli.classpath"/>
+        </junit>
+    </target>
+    <target name="TestLogin_Security">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="web_test.TestLogin_Security" todir="${junit.output.dir}"/>
+            <classpath refid="DB_Ser_Cli.classpath"/>
+        </junit>
+    </target>
+    <target name="WebApp_Tests">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="web_test.WebApp_Tests" todir="${junit.output.dir}"/>
+            <classpath refid="DB_Ser_Cli.classpath"/>
+        </junit>
+    </target>
+    <target name="junitreport">
+        <junitreport todir="${junit.output.dir}">
+            <fileset dir="${junit.output.dir}">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report format="frames" todir="${junit.output.dir}"/>
+        </junitreport>
+    </target>
+    <target name="war" description="Bundles the application as a WAR file" depends="clean, build">
+              	<mkdir dir="WebContent/WEB-INF/classes"/>
+    	
+    	<copy includeemptydirs="false" todir="WebContent/WEB-INF/classes">
+    			<fileset dir="build/classes">
+    			<include name="**/*.class"/>
+    			</fileset>
+    	</copy>
+    		
+    	<war destfile="DB_Ser_Cli.war"
+    		basedir="WebContent"
+    		needxmlfile="false">
+    	</war>
+    </target>
+</project>

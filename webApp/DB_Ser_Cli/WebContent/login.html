@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<span id="messageGoesHere"></span>
+	<p id="description">Please enter your credentials:</p>
+	
+	<form name="form_login" method="post">
+		Username:
+		<input id="username" type="text" name="username"><br><br>
+		Password:
+    	<input id="password" type="password" name="password"><br><br>
+    	<input id="submit" type="submit" value="Login">
+	</form>
+	
+	<script type="text/javascript">
+		window.onload = function(){
+			document.form_login.action = "http://192.168.0.105:8080/DB_Ser_Cli/login";
+		}
+	</script>
+</body>
+</html>
