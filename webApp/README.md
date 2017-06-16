@@ -6,7 +6,7 @@ This project is an application of how a web server handles http requests from cl
 to manage a database (derby) using an html file from another end-system, provide version control support for files.
 
 Description:
-Upon connecting to http://localhost:8080/DB_Ser_Cli/login.html, the user is then required to enter credentials for authentication. On the server side, 
+Upon connecting to http://ip_address:8080/DB_Ser_Cli/login.html, the user is then required to enter credentials for authentication. On the server side, 
 the servlet "Login" is designed to handle the authentication from the user. Upon successful authentication, the servlet "login" will allow the user to 
 retrieve data from database in the client.html, and upload files to the host machine in login.html.
 
