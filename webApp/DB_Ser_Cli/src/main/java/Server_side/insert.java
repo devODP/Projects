@@ -9,11 +9,14 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.http.annotation.Obsolete;
 
 import Server_side.DB_Connection;
 
@@ -64,6 +67,8 @@ public class insert extends HttpServlet {
 							stmt.executeUpdate(createTable);
 							LOGGER.log(Level.INFO, "Table " + tableName + " created.");
 						} catch (SQLException se) {
+							se.printStackTrace();
+							user.setMessage("Problem during creating table.");
 							LOGGER.log(Level.SEVERE, "Problem during creating table.", new Object[] { se.getMessage() });
 						}
 						
@@ -89,22 +94,27 @@ public class insert extends HttpServlet {
 						
 						try {
 							stmt.executeUpdate(insertQuery);
-							LOGGER.log(Level.INFO, "Data in the file are inserted into database.");
+							LOGGER.log(Level.INFO, "Data at row " + (++row) + " in file " + tableName + " are inserted into database.");
 							} catch (SQLException se) {
 							LOGGER.log(Level.SEVERE, "Problem during inserting data.", new Object[] { se.getMessage() });
 						}
+						
+						user.setMessage("Table " + tableName + " created.");
 					}
 				}
-
+				
 				user.setFileEmpty(true);
 			} catch (IOException e) {
 				LOGGER.log(Level.SEVERE, "Problem during reading the file.", new Object[] { e.getMessage() });
 			}
+		}else{
+			user.setMessage("Please upload a file before attempting to insert data into the database.");
 		}
 
 		response.sendRedirect("client.html");
 	}
-
+	
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
