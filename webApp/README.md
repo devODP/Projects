@@ -10,5 +10,5 @@ Upon connecting to http://ip_address:8080/DB_Ser_Cli/login.html, the user is the
 Currently, user can be successfully authenticated by entering correct credentials (e.g. username = "admin", password = "admin") and be able to upload files to the web server and retrieve data from the database from another end system under the same network. 
 There can be only one admin logged in at a time. Second user is restricted to request any service on the web server until the first user logged out. The application can support inserting data into the database using pre-processed .csv file provided from users.
 
-The file demo.gif demonstrate how the application interact with the browser and the database. It can be found under Projects/webApp/. A better version can be found here:
+The file demo.gif demonstrates how the application interacts with the browser and the database. It can be found under Projects/webApp/. A better version can be found here:
 https://raw.githubusercontent.com/devODP/Projects/master/webApp/demo.gif
