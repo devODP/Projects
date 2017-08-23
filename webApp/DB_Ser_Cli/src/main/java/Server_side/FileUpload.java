@@ -44,17 +44,17 @@ public class FileUpload extends HttpServlet {
 		final String fileName = getFileName(filePart);
 
 		OutputStream out = null;
-		InputStream filecontent = null;
+		InputStream fileContent = null;
 		final PrintWriter writer = response.getWriter();
 
 		if (user.getAddr().equals(request.getRemoteAddr()) && auth.getReturnedFromUpload() == false) {
 			try {
 				out = new FileOutputStream(new File(path + File.separator + fileName));
-				filecontent = filePart.getInputStream();
+				fileContent = filePart.getInputStream();
 
 				int read = 0;
 				final byte[] bytes = new byte[1024];
-				while ((read = filecontent.read(bytes)) != -1) {
+				while ((read = fileContent.read(bytes)) != -1) {
 					out.write(bytes, 0, read);
 				}
 				writer.println("New file " + fileName + " created at " + path);
@@ -81,7 +81,7 @@ public class FileUpload extends HttpServlet {
 					out.close();
 				}
 				if (filecontent != null) {
-					filecontent.close();
+					fileContent.close();
 				}
 				if (writer != null) {
 					writer.close();
