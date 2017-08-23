@@ -80,7 +80,7 @@ public class FileUpload extends HttpServlet {
 				if (out != null) {
 					out.close();
 				}
-				if (filecontent != null) {
+				if (fileContent != null) {
 					fileContent.close();
 				}
 				if (writer != null) {
