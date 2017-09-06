@@ -1,0 +1,20 @@
+			<div class="container-fluid" ng-repeat="room in hotels.rooms | filter: hotels.filterString | orderBy: selectedItem">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h3 class="panel-title">Hotel <a href="#page-top" class="pull-right" id="back">Back To Top</a></h3>
+					</div>
+					<div class="panel-body">
+						<img class="hotelThumbnail" src="./img/hotels.jpg">
+						<h1>Size: {{room.size}}</h1>
+						<h3>Beds: {{room.beds}}</h3>
+						<p>Room Number: {{room.roomNumber}}</p>
+						<p ng-show="room.kitchen">Kitchen Available</p>
+
+						<div ng-switch on="hotels.isPromoted(room)">
+							<p ng-switch-when="promote" ng-class="{heavy:hotels.isPromoted(room)}" ng-hide="!room.promotion">Save {{room.promotion.discount}} {{room.promotion.message}} </br> Price: ${{room.promotion.promoPrice}}</p>	
+							<p ng-switch-default >Price: ${{room.price}}</p>
+						</div>
+						<button class="btn btn-danger" ng-hide="room.isBooked" ng-click="hotels.booking(room)">Book Now!</button>
+					</div>
+				</div>
+			</div>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="hotels">
+<head>
+	<link rel="stylesheet" type="text/css" href="./css/app.css" />
+</head>
+<body id="page-top" ng-controller="HotelsCtrl as hotels">
+
+	<!-- Spinner -->
+	<div text-align="center">
+		<div class="spinner" ng-hide="loaded"></div>
+	</div>
+
+	<nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand page-scroll" href="#page-top">SLEEKER</a>
+			</div>
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav navbar-right">
+					<li>
+						<div class="dropdown">
+							<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+								<span class="glyphicon glyphicon-pencil"></span>
+							</button>
+							<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+								<li><a ng-click="hotels.changeTheme(1)">Flatly</a></li>
+								<li><a ng-click="hotels.changeTheme(2)">United</a></li>
+								<li><a ng-click="hotels.changeTheme(3)">Cerulean</a></li>
+							</ul>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<header>
+		<div class="header-content">
+			<div class="header-content-inner">
+				<h1>Check In</h1>
+				<hr>
+			</div>
+		</div>
+	</header>
+
+	<a id="transition" href="#searchFormContainer"></a>
+ 
+ 	<div id="searchFormContainer" class="container-fluid highlight">
+
+		<div class="col-lg-12 col-md-9 col-sm-4 col-xs-4">
+
+			<form name="searchForm" ng-submit="!searchForm.$pristine && searchForm.$valid && hotels.searchAvailability()" class="form-inline" role="form" novalidate>
+				<div class="form-group">
+					<label for="search">Search:</label>
+					<input ng-model="search.name" name="search" type="search" ng-minlength="2" class="form-control" required id="search" placeholder="Where">
+						
+				</div>
+
+				<div class="form-group">
+					<bootstrap-calendar 
+					id="arrival" 
+					label="Checkin" 
+					ng-model="hotels.search.arrival" 
+					name="arrival"></bootstrap-calendar>
+				</div>
+
+				<div class="form-group">
+					<bootstrap-calendar 
+					id="checkout" 
+					label="Checkout" 
+					ng-model="hotels.search.checkout" 
+					name="checkout"></bootstrap-calendar>
+				</div>
+				<div class="form-group">
+					<label for="room">Room:</label>
+					<select class="form-control" id="Room">
+						<option>Studio</option>
+						<option selected="selected">1 Bed</option>
+						<option>2 Bed</option>
+						<option>Villa</option>
+						<option>Penthouse</option>
+					</select>
+				</div>
+
+				<button type="submit" class="btn btn-primary">Submit</button>
+			</form>
+		</div>
+	</div>
+	<div class="row highlight">
+		<div class="col-md-12">
+			<div ng-messages="searchForm.search.$error" ng-if="searchForm.search.$dirty" style="color:maroon" role="alert" ng-messages-multiple>
+						<div ng-message="minlength">Can you be more specific?</div>
+						<div ng-message="required">Please enter all information.</div>
+			</div>
+			<div ng-messages="searchForm.departure.$error" ng-if="searchForm.departure.$dirty" style="color:maroon" role="alert" ng-messages-multiple>
+						<div ng-message="required">Please enter all information.</div>
+			</div>
+
+			<div ng-messages="searchForm.arrival.$error" ng-if="searchForm.arrival.$dirty" style="color:maroon" role="alert" ng-messages-multiple>
+						<div ng-message="required">Please enter all information.</div>
+			</div>
+		</div>
+	</div>
+
+	<hr/>
+
+	<div class="filterContainer container-fluid">
+		<div class="col-md-6">
+			<div class="form form-group">
+				<label for="filter">Filter:</label>
+				<input ng-model="hotels.filterString" name="filterString" type="search" ng-minlength="2" class="form-control" id="filter" placeholder="Filter Results Here...">
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="form form-group">
+				<label for="search">Sort By:</label>
+				<select ng-model="selectedItem" class="form-control" id="Sortable">
+					<option selected="selected" value=""></option>
+					<option ng-repeat="option in hotels.orderByOptions" value="{{option}}">{{option}}</option>
+				</select>
+			</div>
+
+		</div>
+	</div>
+
+	<div id="results" class="container-fluid highlight results animated" 
+			ng-class="{fadeInUp: hotels.displayAnimation}">
+		<div class="col-md-8 paddingTop">
+			<hotels-result></hotels-result>
+		</div>
+
+
+		<div ng-show="hotels.rooms" class="col-offset-md-8 highlight">
+			<hotels-google-maps></hotels-google-maps>
+			<ads-container></ads-container>
+		</div>
+	</div>
+
+
+	<!-- OVERLAY -->
+	<div class="overlay"></div>
+</body>
+
+<!-- BOOTSTRAP -->
+<!-- <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" type="text/css"/> -->
+<link href="./css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="./css/bootstrap.{{theme}}.css" rel="stylesheet" type="text/css"/>
+<link href="./css/spinner.css" rel="stylesheet" type="text/css"/>
+<link href="./css/Animate.css" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" type="text/css" href="./css/app.css" />
+<link rel="stylesheet" type="text/css" href="./css/bootstrap-datetimepicker.min.css" />
+
+
+<script src="http://code.jquery.com/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="./js/bootstrap-datetimepicker.min.js"></script>
+<script src="./js/autocomplete.min.js"></script>
+
+<!-- LOAD ANGULARJS LIBRARIES LIKE THIS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.16/angular.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.16/angular-route.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.16/angular-messages.js"></script>
+
+<!-- LOAD APPLICATION LIBRARIES -->
+<!-- <script src="./app/app.js"/></script>  -->
+<script src="./app/hotels/hotels.js"></script>
+</html>
