@@ -19,21 +19,21 @@
 			style="font-size: 30px; text-align: center; padding: 10px 0;">computer</i>
 	</form>
 	<br>
-	<form action="http://192.168.0.105:8080/DB_Ser_Cli/logout" method="get">
+	<form action="http://192.168.0.100:8080/DB_Ser_Cli/logout" method="get">
 		<input id="logout" type="submit" value="Logout">
 	</form>
 	<br>
 	<br>
 	
 	<br>
-	<form action="http://192.168.0.105:8080/DB_Ser_Cli/upload"
+	<form action="http://192.168.0.100:8080/DB_Ser_Cli/upload"
 		enctype="multipart/form-data" method="post" style="display:inline;">
 		File: <input type="file" name="file" id="file"/> <i class="fa fa-file"
 			style="font-size: 30px; color: lightblue; font-weight: 200;"></i><br>
 		<br> <input type="submit" id="ul" name="upload" value="Upload" />
 	</form> 
 	
-	<form action="http://192.168.0.105:8080/DB_Ser_Cli/insert"
+	<form action="http://192.168.0.100:8080/DB_Ser_Cli/insert"
 		enctype="multipart/form-data" method="post" style="display:inline;">
 		<input type="submit" id="ui" name="Insert" value="Insert" />
 	</form>
@@ -43,7 +43,7 @@
 	<textarea id="serverMessage" rows="10" cols="100" readonly></textarea>
 
 	<script type="text/javascript">	
-		var ws = new WebSocket("ws://192.168.0.105:8080/DB_Ser_Cli/index");
+		var ws = new WebSocket("ws://192.168.0.100:8080/DB_Ser_Cli/index");
 		var para = document.getElementById("messagesTextArea");
 
 		ws.onmessage = function(event) {
