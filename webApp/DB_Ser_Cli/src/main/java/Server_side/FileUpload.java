@@ -42,15 +42,12 @@ public class FileUpload extends HttpServlet {
 		final String path = this.getServletContext().getRealPath("/");
 		final Part filePart = request.getPart("file");
 		final String fileName = getFileName(filePart);
-
-		OutputStream out = null;
-		InputStream fileContent = null;
+		
 		final PrintWriter writer = response.getWriter();
 
 		if (user.getAddr().equals(request.getRemoteAddr()) && auth.getReturnedFromUpload() == false) {
-			try {
-				out = new FileOutputStream(new File(path + File.separator + fileName));
-				fileContent = filePart.getInputStream();
+			try(OutputStream out = new FileOutputStream(new File(path + File.separator + fileName));
+			    InputStream fileContent = filePart.getInputStream()) {
 
 				int read = 0;
 				final byte[] bytes = new byte[1024];
@@ -77,12 +74,6 @@ public class FileUpload extends HttpServlet {
 				LOGGER.log(Level.SEVERE, "Problems during file upload. Error:{0}", new Object[] { fne.getMessage() });
 				response.sendRedirect("client.html");
 			} finally {
-				if (out != null) {
-					out.close();
-				}
-				if (fileContent != null) {
-					fileContent.close();
-				}
 				if (writer != null) {
 					writer.close();
 				}
