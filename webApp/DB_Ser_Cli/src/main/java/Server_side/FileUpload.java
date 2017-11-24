@@ -46,7 +46,7 @@ public class FileUpload extends HttpServlet {
 		final PrintWriter writer = response.getWriter();
 
 		if (user.getAddr().equals(request.getRemoteAddr()) && auth.getReturnedFromUpload() == false) {
-			try(OutputStream out = new FileOutputStream(new File(path + File.separator + fileName));
+			try(OutputStream out = new FileOutputStream(path + File.separator + fileName);
 			    InputStream fileContent = filePart.getInputStream()) {
 
 				int read = 0;
