@@ -19,31 +19,37 @@
 			style="font-size: 30px; text-align: center; padding: 10px 0;">computer</i>
 	</form>
 	<br>
-	<form action="http://192.168.0.100:8080/DB_Ser_Cli/logout" method="get">
-		<input id="logout" type="submit" value="Logout">
+	<form name="logout" method="get">
+		<input id="logout" type="submit" value="Logout" 
+			onclick="connectLogout();">
 	</form>
 	<br>
 	<br>
-	
+
 	<br>
-	<form action="http://192.168.0.100:8080/DB_Ser_Cli/upload"
-		enctype="multipart/form-data" method="post" style="display:inline;">
-		File: <input type="file" name="file" id="file"/> <i class="fa fa-file"
+	<form name="upload"
+		enctype="multipart/form-data" method="post" style="display: inline;">
+		File: <input type="file" name="file" id="file" /> <i
+			class="fa fa-file"
 			style="font-size: 30px; color: lightblue; font-weight: 200;"></i><br>
-		<br> <input type="submit" id="ul" name="upload" value="Upload" />
-	</form> 
-	
-	<form action="http://192.168.0.100:8080/DB_Ser_Cli/insert"
-		enctype="multipart/form-data" method="post" style="display:inline;">
-		<input type="submit" id="ui" name="Insert" value="Insert" />
+		<br> <input type="submit" id="ul" name="upload" value="Upload" 
+					onclick = "connectUpload();"/>
 	</form>
-	<br><br>
-	
-	
+
+	<form name="insert"
+		enctype="multipart/form-data" method="post" style="display: inline;">
+		<input type="submit" id="ui" name="Insert" value="Insert" 
+				onclick="connectInsert();"/>
+	</form>
+	<br>
+	<br>
+
+
 	<textarea id="serverMessage" rows="10" cols="100" readonly></textarea>
 
 	<script type="text/javascript">	
-		var ws = new WebSocket("ws://192.168.0.100:8080/DB_Ser_Cli/index");
+	    var wsUri = "ws://" + document.location.host + "/DB_Ser_Cli/index";
+		var ws = new WebSocket(wsUri);
 		var para = document.getElementById("messagesTextArea");
 
 		ws.onmessage = function(event) {
@@ -64,6 +70,17 @@
 			ws.send(textMessage.value);
 		}
 
+		function connectLogout(){
+			document.logout.action = "http://" + document.location.host + "/DB_Ser_Cli/logout";
+		}
+		
+		function connectUpload(){
+			document.upload.action = "http://" + document.location.host + "/DB_Ser_Cli/upload";
+		}
+		
+		function connectInsert(){
+			document.insert.action = "http://" + document.location.host + "/DB_Ser_Cli/insert";
+		}
 		
 		function getUserIP(privateIP) {
 		    //compatibility for firefox and chrome
