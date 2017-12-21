@@ -42,6 +42,8 @@ public class login extends HttpServlet {
 				auth.setVisitedLogin(true);
 				response.sendRedirect("client.html");
 			} else {
+				user.setAddrVoid();
+				user.setLockStatus(true);
 				response.sendRedirect("login.html");
 			}
 		} else if (user.getAddr().equals(request.getRemoteAddr()) && request.getParameter("username").equals("admin")
