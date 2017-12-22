@@ -16,17 +16,20 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/logout")
 public class logout extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static AuthenticationScheme auth;
 	
 	public logout() {
 		super();
-		auth = new AuthenticationScheme();
 	}
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+			throws ServletException, IOException { 
+
+		// User information to be cleared out 
+		AuthenticationScheme auth = new AuthenticationScheme();;
 		User_Info user = new User_Info();
+		//
+		
 		PrintWriter out = response.getWriter();
 		if (request.getRemoteAddr().equals(user.getAddr())) {
 			user.setLockStatus(true);
@@ -35,7 +38,7 @@ public class logout extends HttpServlet {
 			auth.setFreshUser(true);
 			response.sendRedirect("login.html");
 		} else {
-			out.println("Someone is logined as an administrator before you do.");
+			out.println("Someone is logged in as an administrator before you do.");
 			out.println("Please come back in a moment");
 		}
 	}

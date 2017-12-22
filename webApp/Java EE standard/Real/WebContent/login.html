@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="ISO-8859-1">
+<title>Welcome</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<span id="messageGoesHere"></span>
+	<p id="description">Please enter your credentials:</p>
+	
+	<form name="form_login" method="post" action="j_security_check">
+		Username:
+		<input id="username" type="text" name="j_username"><br><br>
+		Password:
+    	<input id="password" type="password" name="j_password"><br><br>
+    	<input id="submit" type="submit" value="Login">
+	</form>
+</body>
+</html>
