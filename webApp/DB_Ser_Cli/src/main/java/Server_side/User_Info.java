@@ -1,5 +1,8 @@
 package Server_side;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class User_Info {
 	private static boolean lock = true;
 	private static String messageToUser = "";

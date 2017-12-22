@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.BufferedOutputStream;
 import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -48,8 +49,7 @@ public class FileUpload extends HttpServlet {
 
 		if (user.getAddr().equals(request.getRemoteAddr()) && auth.getReturnedFromUpload() == false) {
 			try(OutputStream out = new BufferedOutputStream (new FileOutputStream(path + File.separator + fileName));
-					InputStream fileContent = filePart.getInputStream();) {
-			
+
 				int read = 0;
 				final byte[] bytes = new byte[1024];
 				while ((read = fileContent.read(bytes)) != -1) {
