@@ -3,8 +3,40 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
 	
 	<session-config>
-  		<session-timeout>30</session-timeout> 
+  		<session-timeout>1</session-timeout> 
 	</session-config>
+	
+	<servlet>
+        <servlet-name>upload</servlet-name>
+        <servlet-class>core.FileUploadServlet</servlet-class>
+        <multipart-config>
+            <max-file-size>10485760</max-file-size>
+            <max-request-size>20971520</max-request-size>
+            <file-size-threshold>5242880</file-size-threshold>
+        </multipart-config>
+    </servlet>
+    <servlet-mapping>
+    	<servlet-name>upload</servlet-name>
+    	<url-pattern>/upload</url-pattern>
+   	</servlet-mapping>
+    
+    <servlet>
+        <servlet-name>insert</servlet-name>
+        <servlet-class>core.InsertServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+    	<servlet-name>insert</servlet-name>
+    	<url-pattern>/insert</url-pattern>
+   	</servlet-mapping>
+    
+    <servlet>
+        <servlet-name>logout</servlet-name>
+        <servlet-class>core.LogoutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+    	<servlet-name>logout</servlet-name>
+    	<url-pattern>/logout</url-pattern>
+   	</servlet-mapping>
 	
 	<security-constraint>
    		<web-resource-collection>
