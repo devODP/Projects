@@ -1,5 +1,6 @@
 package Server_side;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -43,19 +44,17 @@ public class FileUpload extends HttpServlet {
 		final Part filePart = request.getPart("file");
 		final String fileName = getFileName(filePart);
 
-		OutputStream out = null;
-		InputStream fileContent = null;
 		final PrintWriter writer = response.getWriter();
 
 		if (user.getAddr().equals(request.getRemoteAddr()) && auth.getReturnedFromUpload() == false) {
-			try {
-				out = new FileOutputStream(new File(path + File.separator + fileName));
-				fileContent = filePart.getInputStream();
-
+			try(OutputStream out = new BufferedOutputStream (new FileOutputStream(path + File.separator + fileName));
+					InputStream fileContent = filePart.getInputStream();) {
+			
 				int read = 0;
 				final byte[] bytes = new byte[1024];
 				while ((read = fileContent.read(bytes)) != -1) {
 					out.write(bytes, 0, read);
+					//out.flush();
 				}
 				writer.println("New file " + fileName + " created at " + path);
 				LOGGER.log(Level.INFO, "File {0} being uploaded to {1}", new Object[] { fileName, path });
@@ -70,19 +69,15 @@ public class FileUpload extends HttpServlet {
 				fullPath[1] = fileName;
 				user.setFileName(fullPath);
 				user.setFileEmpty(false);
+				user.setMessage("File " + fileName + " is uploaded.");
 				
 				response.sendRedirect("client.html");
 			} catch (FileNotFoundException fne) {
 				LOGGER.log(Level.INFO, "No file is selected");
 				LOGGER.log(Level.SEVERE, "Problems during file upload. Error:{0}", new Object[] { fne.getMessage() });
+				user.setMessage("Error: File " + fileName + " is not uploaded.");
 				response.sendRedirect("client.html");
 			} finally {
-				if (out != null) {
-					out.close();
-				}
-				if (fileContent != null) {
-					fileContent.close();
-				}
 				if (writer != null) {
 					writer.close();
 				}

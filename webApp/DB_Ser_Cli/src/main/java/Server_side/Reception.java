@@ -22,8 +22,8 @@ public class Reception extends HttpServlet {
 	private final static Logger LOGGER = Logger.getLogger(FileUpload.class.getCanonicalName());
 	
 	private static final long serialVersionUID = 1L;
-	private static AuthenticationScheme auth;
-	private static User_Info user;
+	private AuthenticationScheme auth;
+	private User_Info user;
 	private static String currentClient = "";
 
 	/**
@@ -40,6 +40,7 @@ public class Reception extends HttpServlet {
 		try {
 			if (user.getLockStatus() == false && auth.getVisitedLogin() == true) {
 				auth.setVisitedLogin(false);
+				user.setMessage("Welcome");
 				session.getBasicRemote().sendText("Welcome");
 			} else if (user.getLockStatus() == false && auth.getReturnedFromUpload() == true) {
 				auth.setReturnedFromUpload(false);
@@ -63,28 +64,27 @@ public class Reception extends HttpServlet {
 		if (patternMatcher(data)) {
 			currentClient = data;
 			if (!currentClient.equals(user.getAddr())) {
-				return "Invalid Login";
+				return "Invalid Login" + " " + data + " " + user.getAddr();
 			} else {
-				return "Visiting IP matches login IP";
+				return "Authentication passed - " + user.getMessage();
 			}
 		} else {
 			String message;
 			String entries = "";
 			String SQLQuery = data.toUpperCase();
-			DB_Connection conn = new DB_Connection();
-			Statement stmt = conn.getStatement();
 			ArrayList<Object> records = new ArrayList<>();
 
-			try {
+			try (DB_Connection conn = new DB_Connection();
+				Statement stmt = conn.getStatement()){
 				if (SQLQuery.contains("CREATE")) {
 					stmt.executeUpdate(SQLQuery);
-					return "Table created";
+					return "Authentication passed - Table created";
 				} else if (SQLQuery.contains("INSERT")) {
 					stmt.executeUpdate(SQLQuery);
-					return "Values inserted";
+					return "Authentication passed - Values inserted";
 				} else if (SQLQuery.contains("DROP")) {
 					stmt.executeUpdate(SQLQuery);
-					return "Table dropped";
+					return "Authentication passed - Table dropped";
 				} else if (SQLQuery.contains("SELECT")) {
 					
 					//Preparing for retrieving data from database
@@ -117,14 +117,8 @@ public class Reception extends HttpServlet {
 					return "Command is not recognized by database";
 				}
 			} catch (SQLException se) {
-				try {
-					stmt.close();
-					LOGGER.log(Level.SEVERE, "Problem with SQL command.", new Object[] { se.getMessage() });
-					return se.getMessage();
-				} catch (SQLException e) {
-					LOGGER.log(Level.SEVERE, "Problem in cleaning up environment.", new Object[] { e.getMessage() });
-					return e.getMessage();
-				}
+				LOGGER.log(Level.SEVERE, "Problem with SQL command.", new Object[] { se.getMessage() });
+				return se.getMessage();
 			}
 		}
 	}

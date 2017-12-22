@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class DB_Connection {
+public final class DB_Connection implements AutoCloseable{
 	private Connection conn = null;
 	private Statement stmt;
 	
