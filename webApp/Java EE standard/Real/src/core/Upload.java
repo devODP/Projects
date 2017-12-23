@@ -35,7 +35,7 @@ public class Upload {
 		return "Class Upload";
 	}
 
-	public void fileUpload(HttpServletRequest request, HttpServletResponse response)
+	public void fileUpload(final HttpServletRequest request, final HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
 
@@ -43,10 +43,10 @@ public class Upload {
 		//final String path = this.getServletContext().getRealPath("/");
 		final String path = Paths.get(".").toString();
 		final Part filePart = request.getPart("file");
+		
 		final String fileName = getFileName(filePart);
-
 		final PrintWriter writer = response.getWriter();
-
+		
 		try (OutputStream out = new BufferedOutputStream(new FileOutputStream(path + "/" + fileName));
 				InputStream fileContent = filePart.getInputStream()) {
 
@@ -64,10 +64,11 @@ public class Upload {
 			String fullPath[] = new String[2];
 			fullPath[0] = path;
 			fullPath[1] = fileName;
+			
 			User_Info userInfo = new User_Info();
 			userInfo.setFile(fullPath);
-			
 			response.sendRedirect("index.html");
+			
 		} catch (FileNotFoundException fne) {
 			response.sendRedirect("index.html");
 		} finally {

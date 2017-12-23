@@ -1,40 +1,35 @@
 package core;
 
-import java.util.Map;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Set;
+import java.util.concurrent.CopyOnWriteArraySet;
+import java.io.IOException;
+import javax.websocket.EncodeException;
+import javax.websocket.OnClose;
+import javax.websocket.OnMessage;
+import javax.websocket.OnOpen;
+import javax.websocket.Session;
+import javax.websocket.server.ServerEndpoint;
 
-import javax.ejb.Lock;
-import javax.ejb.Singleton;
-import javax.ejb.Startup;
-
-@Startup
-@Singleton
+@ServerEndpoint("/attendance")
 public class Attendance {
-	private Map<String, ArrayList<Boolean>> attendanceList = new HashMap<>();
+	private Set<Session> attendanceList = new CopyOnWriteArraySet<>();
 	
 	public Attendance(){}
 	
-	@Lock
-	public void putIPStatus(String ip, ArrayList<Boolean> statList){
-		attendanceList.put(ip, statList);
+	@OnOpen
+	public void checkIn(final Session session) throws IOException, EncodeException{
+		attendanceList.add(session);
+		session.getBasicRemote().sendObject("Client ID " + session.getId() + " Welcome.");
 	}
 	
-	public ArrayList<Boolean> getIPStatus(String ip){
-		return new ArrayList<Boolean>(attendanceList.get(ip));
-	}
-	
-	@Lock
-	public void removeIP(String ip){
-		attendanceList.remove(ip);
+	@OnClose
+	public void checkOut(final Session session){
+		attendanceList.remove(session);
 	}
 
-	public boolean containsIP(String ip){
-		return attendanceList.containsKey(ip);
-	}
-
-	@Lock
-	public void updateStatus(String ip, ArrayList<Boolean> statList){
-		attendanceList.replace(ip, statList);
+	@OnMessage
+	public void broacast(final String Message, final Session session) 
+			throws IOException, EncodeException{
+		System.out.println("send pressed");
 	}
 }
