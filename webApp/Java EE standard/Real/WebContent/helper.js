@@ -1,30 +1,24 @@
 // This javascript file contains functions that are performed by user and a 
 // websocket
 
-//var wsUri = "ws://" + document.location.host + "/DB_Ser_Cli/index";
-//var ws = new WebSocket(wsUri);
-//var para = document.getElementById("messagesTextArea");
+var wsUri = "ws://" + document.location.host + "/Real/attendance";
+var ws = new WebSocket(wsUri);
 
-//ws.onmessage = function(event) {
-	//var mySpan = document.getElementById("messageGoesHere");
-	//serverMessage.value = event.data;
-	//if (serverMessage.value == "Invalid Login") {
-		//window.location.href = "login.html";
-	//}
-//};
-		
-//ws.onopen = function(){
-	//getUserIP(function(ip){
-		//ws.send(ip);
-	//});
-//};
+ws.onmessage = function(event) {
+	serverMessage.value = event.data;
+};
 
-//function sendMessage() {
-	//ws.send(textMessage.value);
-//}
+ws.onopen = function(){
+	onOpen();
+};
+
+function sendMessage() {
+	ws.send(textMessage.value);
+}
 
 function connectLogout(){
 	document.logout.action = "http://" + document.location.host + "/Real/logout";
+	ws.close();
 }
 		
 function connectUpload(){
