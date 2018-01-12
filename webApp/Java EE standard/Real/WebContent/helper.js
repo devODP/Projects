@@ -41,6 +41,14 @@ function _(id) {
 	return document.getElementById(id);
 }
 
+function drag_enter(event) {
+	event.target.style.color="#ccc";
+}
+
+function drag_leave(event) {
+	event.target.style.color="#000";
+}
+
 function drag_drop(event) {
 	event.preventDefault();
 	
@@ -50,6 +58,8 @@ function drag_drop(event) {
 		formData.set("name", event.dataTransfer.files[i].name);
 		ls.push(formData);
 	}
+	
+	event.target.style.color="#000";
 }
 
 function readDropZone() {

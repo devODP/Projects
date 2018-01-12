@@ -27,8 +27,8 @@
 	</div>
 	<br>
 	<br>
-	<div id="drop_zone" ondrop="drag_drop(event);"
-		ondragover="return false;">
+	<div id="drop_zone" ondrop="drag_drop(event);" ondragover="return false;"
+		ondragenter="drag_enter(event);" ondragleave="drag_leave(event);">
 		<form name="upload" enctype="multipart/form-data" method="post"
 			style="display: inline;">
 			File: <input type="file" name="file" id="file" /> <i
