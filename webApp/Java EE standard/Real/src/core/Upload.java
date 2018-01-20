@@ -17,6 +17,9 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 import javax.ejb.LocalBean;
 
@@ -40,42 +43,46 @@ public class Upload {
 		response.setContentType("text/html;charset=UTF-8");
 
 		// Create path components to save the file
-		//final String path = this.getServletContext().getRealPath("/");
+		// final String path = this.getServletContext().getRealPath("/");
 		final String path = Paths.get(".").toString();
-		final Part filePart = request.getPart("file");
-		
-		final String fileName = getFileName(filePart);
-		final PrintWriter writer = response.getWriter();
-		
-		try (OutputStream out = new BufferedOutputStream(new FileOutputStream(path + "/" + fileName));
-				InputStream fileContent = filePart.getInputStream()) {
+		// final Part filePart = request.getPart("file");
 
-			int read = 0;
-			final byte[] bytes = new byte[1024];
-			while ((read = fileContent.read(bytes)) != -1) {
-				out.write(bytes, 0, read);
-			}
-			System.out.println("New file " + fileName + " created at " + Paths.get(".").toRealPath());
+		for (final Part filePart : request.getParts()) {
+			if(!filePart.getName().equals("file")) break;
+			
+			final String fileName = getFileName(filePart);
+			//final PrintWriter writer = response.getWriter();
+			try (OutputStream out = new BufferedOutputStream(new FileOutputStream(path + "/" + fileName));
+					InputStream fileContent = filePart.getInputStream()) {
 
-			/*
-			 * stores an array consisting of the path and the file name for the
-			 * servlet "insert"
-			 */
-			String fullPath[] = new String[2];
-			fullPath[0] = path;
-			fullPath[1] = fileName;
-			
-			User_Info userInfo = new User_Info();
-			userInfo.setFile(fullPath);
-			response.sendRedirect("index.html");
-			
-		} catch (FileNotFoundException fne) {
-			response.sendRedirect("index.html");
-		} finally {
-			if (writer != null) {
-				writer.close();
+				int read = 0;
+				final byte[] bytes = new byte[1024];
+				while ((read = fileContent.read(bytes)) != -1) {
+					out.write(bytes, 0, read);
+				}
+				System.out.println("New file " + fileName + " created at " + Paths.get(".").toRealPath());
+
+				/*
+				 * stores an array consisting of the path and the file name for
+				 * the servlet "insert"
+				 */
+				String fullPath[] = new String[2];
+				fullPath[0] = path;
+				fullPath[1] = fileName;
+
+				User_Info userInfo = new User_Info();
+				userInfo.setFile(fullPath);
+
+			} catch (FileNotFoundException fne) {
+				break;
+			} finally {
+				//if (writer != null) {
+					//writer.close();
+				//}
 			}
 		}
+
+		response.sendRedirect("index.html");
 	}
 
 	private String getFileName(final Part part) {
