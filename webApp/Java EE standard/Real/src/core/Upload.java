@@ -71,7 +71,7 @@ public class Upload {
 				fullPath[1] = fileName;
 
 				User_Info userInfo = new User_Info();
-				userInfo.setFile(fullPath);
+				userInfo.addFile(fullPath);
 
 			} catch (FileNotFoundException fne) {
 				break;

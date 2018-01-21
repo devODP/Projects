@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 @LocalBean
 @Stateless
 public class Insert {
-	
+
 	public Insert() {
 	}
 
@@ -30,52 +30,54 @@ public class Insert {
 
 	public void fileInsert(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-        User_Info user = new User_Info();
+		User_Info user = new User_Info();
 
-		try (Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/db_demo;create=true");
-				Statement stmt = conn.createStatement();
-				BufferedReader br = new BufferedReader(
-						new FileReader(user.getFileName()[0] 
-								+ "/" 
-								+ user.getFileName()[1]))) {
+		for (int i = 0; i < user.getFiles().size(); i++) {
+			try (Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/db_demo;create=true");
+					Statement stmt = conn.createStatement();
+					BufferedReader br = new BufferedReader(
+							new FileReader(user.getFiles().get(i)[0] + "/" + user.getFiles().get(i)[1]))) {
 
-			addFileToDB(user.getFileName(), br, conn, stmt);
-			
-		} catch (IOException eIO) {
-			eIO.printStackTrace();
-		} catch (SQLException eSQL) {
-			eSQL.printStackTrace();
+				addFileToDB(user.getFiles().get(i), br, conn, stmt);
+				System.out.println(user.getFiles().get(i)[1] + " is uploaded.");
+			} catch (IOException eIO) {
+				eIO.printStackTrace();
+			} catch (SQLException eSQL) {
+				eSQL.printStackTrace();
+			}
 		}
+		user.setFilesEmpty();
+		response.sendRedirect("index.html");
 	}
 
-	private void addFileToDB(String[] fileUploaded, BufferedReader br, 
-									Connection conn, Statement stmt) throws IOException, SQLException {
+	private void addFileToDB(String[] fileUploaded, BufferedReader br, Connection conn, Statement stmt)
+			throws IOException, SQLException {
 		StringBuilder[] ls = new StringBuilder[2];
 		ls[1] = new StringBuilder("");
-		
+
 		String fileName = fileUploaded[1];
 		String tableName = fileName.substring(0, fileName.indexOf('.'));
-		
+
 		int row = 0;
 		String line = "";
-		
+
 		while ((line = br.readLine()) != null) {
 			if (row == 0) {
-				
-				//table attributes starts from row 0 of the excel file
-				String [] attributes = line.split(",");
-				createTable (ls, attributes, tableName);
-				
+
+				// table attributes starts from row 0 of the excel file
+				String[] attributes = line.split(",");
+				createTable(ls, attributes, tableName);
+
 				try {
 					stmt.executeUpdate(ls[0].toString());
 				} catch (SQLException se) {
 					throw se;
 				}
 				row++;
-				
+
 			} else {
-				
-				//table entries starts from row 1 of the excel file
+
+				// table entries starts from row 1 of the excel file
 				String entries[] = line.split(",");
 				createEntries(ls, entries, tableName);
 
@@ -87,9 +89,10 @@ public class Insert {
 			}
 		}
 	}
-	
-	// Constructing the "CREATE TABLE...." statment for further queries to database
-	private void createTable (StringBuilder [] ls, String [] attributes, String tableName){
+
+	// Constructing the "CREATE TABLE...." statment for further queries to
+	// database
+	private void createTable(StringBuilder[] ls, String[] attributes, String tableName) {
 		ls[0] = new StringBuilder("CREATE TABLE " + tableName + "(");
 		ls[0].append(attributes[0] + " varchar (50) NOT NULL");
 
@@ -98,13 +101,12 @@ public class Insert {
 				ls[0].append(", " + attributes[i] + " varchar (50) NOT NULL");
 			}
 		}
-		
+
 		ls[0].append(")");
 	}
-	
 
 	// Constructing the "INSERT" command
-	private void createEntries (StringBuilder [] ls, String [] entries, String tableName){
+	private void createEntries(StringBuilder[] ls, String[] entries, String tableName) {
 		ls[1] = new StringBuilder("INSERT INTO " + tableName + " values ('" + entries[0] + "'");
 
 		if (entries.length > 1) {
@@ -112,7 +114,7 @@ public class Insert {
 				ls[1].append(", '" + entries[i] + "'");
 			}
 		}
-		
+
 		ls[1].append(")");
 	}
 }

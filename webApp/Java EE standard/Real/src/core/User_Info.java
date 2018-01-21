@@ -4,16 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User_Info {
-	private static String fileToUpload[] = new String[2];
+	private static ArrayList<String[]> fileToUpload = new ArrayList<>();
 	
 	public User_Info(){
 	}
 	
-	public void setFile(String [] file){
-		fileToUpload = file;
+	public void addFile(String [] file){
+		fileToUpload.add(file);
 	}
 	
-	public String[] getFileName(){
-		return fileToUpload;
+	public ArrayList<String[]> getFiles(){
+		return new ArrayList<String[]>(fileToUpload);
+	}
+	
+	public void setFilesEmpty(){
+		fileToUpload.clear();
 	}
 }
