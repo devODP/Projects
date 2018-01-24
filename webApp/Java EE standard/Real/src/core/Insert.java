@@ -81,6 +81,15 @@ public class Insert {
 				String entries[] = line.split(",");
 				createEntries(ls, entries, tableName);
 
+				// checks basic sql injection (e.g. or 1=1)
+				SQLChecker sqlChecker = new SQLChecker(ls[1]);
+				if(sqlChecker.isSQLInjection()) {
+					throw new SQLException("SQl injection detected in data.");
+				}else {
+					System.out.println("data are safe to insert into the database");
+				}
+				//
+				
 				try {
 					stmt.executeUpdate(ls[1].toString());
 				} catch (SQLException se) {

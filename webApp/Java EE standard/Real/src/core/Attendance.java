@@ -9,6 +9,7 @@ import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
+import core.SQLChecker;
 
 @ServerEndpoint("/attendance")
 public class Attendance {
@@ -30,6 +31,8 @@ public class Attendance {
 	@OnMessage
 	public void broacast(final String Message, final Session session) 
 			throws IOException, EncodeException{
+		SQLChecker sC = new SQLChecker(new StringBuilder(Message));
+		System.out.println("SQL injection? : " + sC.isSQLInjection());
 		System.out.println("send pressed");
 	}
 }
