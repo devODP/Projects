@@ -3,20 +3,20 @@ package core;
 import java.util.ArrayList;
 
 public final class SQLChecker {
-	private final StringBuilder input;
+	private final StringBuilder __input__;
 
 	public SQLChecker(StringBuilder input) {
-		this.input = new StringBuilder(input);
+		this.__input__ = new StringBuilder(input);
 	}
 
 	public String getInput() {
-		return new StringBuilder(input.toString()).toString();
+		return new StringBuilder(__input__.toString()).toString();
 	}
 
 	public boolean isSQLInjection() {
 		boolean result = false;
 
-		String[] tokens = input.toString().split(" ");
+		String[] tokens = __input__.toString().split(" ");
 
 		for (int i = 0; i < tokens.length; i++) {
 			if (tokens[i].contains("=")) {

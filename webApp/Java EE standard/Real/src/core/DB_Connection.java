@@ -6,20 +6,20 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public final class DB_Connection implements AutoCloseable{
-	private Connection conn = null;
-	private Statement stmt;
+	private Connection __conn__ = null;
+	private Statement __stmt__;
 	
 	public DB_Connection() {
-		if (conn == null) {
+		if (__conn__ == null) {
 			try {
-				conn = DriverManager.getConnection("jdbc:derby://localhost:1527/db_demo;create=true");
-				stmt = conn.createStatement();
+				__conn__ = DriverManager.getConnection("jdbc:derby://localhost:1527/db_demo;create=true");
+				__stmt__ = __conn__.createStatement();
 			} catch (SQLException se) {
 				se.printStackTrace();
 			}
 		}else{
 			try {
-				stmt = conn.createStatement();
+				__stmt__ = __conn__.createStatement();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -27,14 +27,14 @@ public final class DB_Connection implements AutoCloseable{
 	}
 	
 	public Connection getConnection(){
-		return conn;
+		return __conn__;
 	}
 	
 	public Statement getStatement(){
-		return stmt;
+		return __stmt__;
 	}
 	
 	public void close() throws SQLException{
-		conn.close();
+		__conn__.close();
 	}
 }

@@ -13,19 +13,19 @@ import core.SQLChecker;
 
 @ServerEndpoint("/attendance")
 public class Attendance {
-	private Set<Session> attendanceList = new CopyOnWriteArraySet<>();
+	private Set<Session> __attendanceList__ = new CopyOnWriteArraySet<>();
 	
 	public Attendance(){}
 	
 	@OnOpen
 	public void checkIn(final Session session) throws IOException, EncodeException{
-		attendanceList.add(session);
+		__attendanceList__.add(session);
 		session.getBasicRemote().sendObject("Client ID " + session.getId() + " Welcome.");
 	}
 	
 	@OnClose
 	public void checkOut(final Session session){
-		attendanceList.remove(session);
+		__attendanceList__.remove(session);
 	}
 
 	@OnMessage

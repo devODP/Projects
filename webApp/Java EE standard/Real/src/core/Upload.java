@@ -31,7 +31,7 @@ import javax.ejb.LocalBean;
 public class Upload {
 
 	public Upload() {
-
+		super();
 	}
 
 	public String toString() {
@@ -43,15 +43,13 @@ public class Upload {
 		response.setContentType("text/html;charset=UTF-8");
 
 		// Create path components to save the file
-		// final String path = this.getServletContext().getRealPath("/");
 		final String path = Paths.get(".").toString();
-		// final Part filePart = request.getPart("file");
 
 		for (final Part filePart : request.getParts()) {
 			if(!filePart.getName().equals("file")) break;
 			
 			final String fileName = getFileName(filePart);
-			//final PrintWriter writer = response.getWriter();
+			
 			try (OutputStream out = new BufferedOutputStream(new FileOutputStream(path + "/" + fileName));
 					InputStream fileContent = filePart.getInputStream()) {
 
@@ -75,11 +73,7 @@ public class Upload {
 
 			} catch (FileNotFoundException fne) {
 				break;
-			} finally {
-				//if (writer != null) {
-					//writer.close();
-				//}
-			}
+			} 
 		}
 
 		response.sendRedirect("index.html");

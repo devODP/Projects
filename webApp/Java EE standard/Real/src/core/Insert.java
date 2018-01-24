@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 public class Insert {
 
 	public Insert() {
+		super();
 	}
 
 	public String toString() {
