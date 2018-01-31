@@ -63,39 +63,35 @@ public class Insert {
 		String line = "";
 
 		while ((line = br.readLine()) != null) {
-			if (row == 0) {
+			try {
+				if (row == 0) {
 
-				// table attributes starts from row 0 of the excel file
-				String[] attributes = line.split(",");
-				createTable(ls, attributes, tableName);
+					// table attributes starts from row 0 of the excel file
+					String[] attributes = line.split(",");
+					createTable(ls, attributes, tableName);
 
-				try {
 					stmt.executeUpdate(ls[0].toString());
-				} catch (SQLException se) {
-					throw se;
-				}
-				row++;
+					row++;
 
-			} else {
+				} else {
 
-				// table entries starts from row 1 of the excel file
-				String entries[] = line.split(",");
-				createEntries(ls, entries, tableName);
+					// table entries starts from row 1 of the excel file
+					String entries[] = line.split(",");
+					createEntries(ls, entries, tableName);
 
-				// checks basic sql injection (e.g. or 1=1)
-				SQLChecker sqlChecker = new SQLChecker(ls[1]);
-				if(sqlChecker.isSQLInjection()) {
-					throw new SQLException("SQl injection detected in data.");
-				}else {
-					System.out.println("data are safe to insert into the database");
-				}
-				//
-				
-				try {
+					// checks basic sql injection (e.g. or 1=1)
+					SQLChecker sqlChecker = new SQLChecker(ls[1]);
+					if (sqlChecker.isSQLInjection()) {
+						throw new SQLException("FATAL: SQL injection detected in data.");
+					} else {
+						System.out.println("data are safe to insert into the database");
+					}
+					//
+
 					stmt.executeUpdate(ls[1].toString());
-				} catch (SQLException se) {
-					throw se;
 				}
+			} catch (SQLException sql) {
+				throw new SQLException("ERROR: A problem was encountered when inserting data to database.");
 			}
 		}
 	}

@@ -12,7 +12,7 @@
 <body>
 	<div id="group1">
 		<p>Please enter your query here:</p>
-		<form>
+		<form name="restfulServices">
 			<input id="textMessage" type="text"> <input id="send"
 				value="Send Message" type="button" onclick="sendMessage();">
 			<i class="material-icons"
@@ -34,10 +34,10 @@
 			style="font-size: 30px; color: lightblue; font-weight: 200;"></i>
 		Drop files here to upload
 	</div>
-	
+	<br>
 	<form name="upload" enctype="multipart/form-data" method="post"
 		style="display: inline;">
-		<input type="file" name="file" id="file">
+		<input type="file" name="file" id="file" multiple>
 		<br> <br> <input type="submit" id="ul" name="upload"
 			value="Upload" onclick="connectUpload();" />
 	</form>

@@ -9,12 +9,12 @@ ws.onmessage = function(event) {
 	serverMessage.value = event.data;
 };
 
-ws.onopen = function() {
-	onOpen();
-};
+//ws.onopen = function() {
+	//onOpen();
+//};
 
 function sendMessage() {
-	ws.send(textMessage.value);
+	window.location.href = "http://" + document.location.host + "/Real/resources/table/" + textMessage.value;
 }
 
 function connectLogout() {
@@ -42,11 +42,11 @@ function _(id) {
 }
 
 function drag_enter(event) {
-	event.target.style.color="#ccc";
+	event.target.style.color="#000";
 }
 
 function drag_leave(event) {
-	event.target.style.color="#000";
+	event.target.style.color="#ccc";
 }
 
 function drag_drop(event) {
@@ -59,7 +59,7 @@ function drag_drop(event) {
 		ls.push(formData);
 	}
 	
-	event.target.style.color="#000";
+	event.target.style.color="#ccc";
 }
 
 function readDropZone() {
