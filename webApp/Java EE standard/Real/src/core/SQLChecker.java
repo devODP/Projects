@@ -1,7 +1,5 @@
 package core;
 
-import java.util.ArrayList;
-
 public final class SQLChecker {
 	private final StringBuilder __input__;
 

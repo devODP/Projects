@@ -1,7 +1,6 @@
 package core;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class User_Info {
 	private static ArrayList<String[]> __fileToUpload__ = new ArrayList<>();
