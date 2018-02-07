@@ -56,6 +56,7 @@ function drag_drop(event) {
 		var formData = new FormData();
 		formData.append("file", event.dataTransfer.files[i]);
 		formData.set("name", event.dataTransfer.files[i].name);
+		
 		ls.push(formData);
 	}
 	
@@ -66,7 +67,7 @@ function readDropZone() {
 	for (var i = 0; i < ls.length; i++) {
 		// create an http request for each formData
 		var xhr = new XMLHttpRequest();
-		xhr.open("POST", "http://" + document.location.host + "/Real/upload");
+		xhr.open("POST", "http://" + document.location.host + "/Real/upload", false);	
 		xhr.send(ls[i]);
 	}
 	// reset list after all formData are sent
