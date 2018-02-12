@@ -21,10 +21,12 @@ public class LogoutServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException { 
 		
+		User_Info user = new User_Info();
 		if(request.getContentType() == null){
 			response.sendRedirect("index.html");
 		}
 		else if(request.getContentType().contains("application/x-www-form-urlencoded")){
+			user.setPairEmpty(request.getUserPrincipal().getName());
 			request.logout();
 			response.sendRedirect("index.html");
 		}

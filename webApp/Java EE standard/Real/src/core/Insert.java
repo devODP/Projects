@@ -14,9 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Session Bean implementation class Insert
- */
+
 @LocalBean
 @Stateless
 public class Insert {
@@ -33,21 +31,24 @@ public class Insert {
 			throws ServletException, IOException {
 		User_Info user = new User_Info();
 
-		for (int i = 0; i < user.getFiles().size(); i++) {
+		for (int i = 0; i < user.getFiles(request.getUserPrincipal().getName()).size(); i++) {
+			
 			try (Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/db_demo;create=true");
 					Statement stmt = conn.createStatement();
 					BufferedReader br = new BufferedReader(
-							new FileReader(user.getFiles().get(i)[0] + "/" + user.getFiles().get(i)[1]))) {
+							new FileReader(user.getFiles(request.getUserPrincipal().getName()).get(i)[0] + "/" 
+											+ user.getFiles(request.getUserPrincipal().getName()).get(i)[1]))) {
 
-				addFileToDB(user.getFiles().get(i), br, conn, stmt);
-				System.out.println(user.getFiles().get(i)[1] + " is uploaded.");
+				addFileToDB(user.getFiles(request.getUserPrincipal().getName()).get(i), br, conn, stmt);
+				System.out.println(user.getFiles(request.getUserPrincipal().getName()).get(i)[1] + " is uploaded.");
+				
 			} catch (IOException eIO) {
 				eIO.printStackTrace();
 			} catch (SQLException eSQL) {
 				eSQL.printStackTrace();
 			}
 		}
-		user.setFilesEmpty();
+		user.setFilesEmpty(request.getUserPrincipal().getName());
 		response.sendRedirect("index.html");
 	}
 
